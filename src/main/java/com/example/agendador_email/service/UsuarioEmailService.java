@@ -5,6 +5,8 @@ import com.example.agendador_email.repository.UsuarioEmailRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UsuarioEmailService {
 
@@ -18,5 +20,9 @@ public class UsuarioEmailService {
         return usuarioEmailRepository.save(usuarioEmailEntity);
     }
 
+    @Transactional
+    public List<UsuarioEmailEntity> findAll(){
+        return usuarioEmailRepository.findAll();
+    }
 
 }
