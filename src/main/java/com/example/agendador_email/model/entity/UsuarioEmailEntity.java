@@ -1,4 +1,4 @@
-package com.example.agendador_email.entity;
+package com.example.agendador_email.model.entity;
 
 
 import jakarta.persistence.*;

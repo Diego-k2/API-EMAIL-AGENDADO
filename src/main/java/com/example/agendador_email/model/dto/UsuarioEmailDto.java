@@ -1,12 +1,10 @@
-package com.example.agendador_email.dto;
+package com.example.agendador_email.model.dto;
 
-import com.example.agendador_email.entity.UsuarioEmailEntity;
-import jakarta.persistence.Column;
+import com.example.agendador_email.model.entity.UsuarioEmailEntity;
 import jakarta.validation.constraints.NotNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class UsuarioEmailDto {
 

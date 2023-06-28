@@ -1,7 +1,7 @@
-package com.example.agendador_email.service;
+package com.example.agendador_email.model.service;
 
-import com.example.agendador_email.entity.UsuarioEmailEntity;
-import com.example.agendador_email.repository.UsuarioEmailRepository;
+import com.example.agendador_email.model.entity.UsuarioEmailEntity;
+import com.example.agendador_email.model.repository.UsuarioEmailRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

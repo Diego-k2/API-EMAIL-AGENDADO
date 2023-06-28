@@ -1,9 +1,9 @@
 package com.example.agendador_email.controller;
 
-import com.example.agendador_email.dto.UsuarioEmailDto;
-import com.example.agendador_email.entity.UsuarioEmailEntity;
+import com.example.agendador_email.model.dto.UsuarioEmailDto;
+import com.example.agendador_email.model.entity.UsuarioEmailEntity;
 import com.example.agendador_email.response.ErrorResponse;
-import com.example.agendador_email.service.UsuarioEmailService;
+import com.example.agendador_email.model.service.UsuarioEmailService;
 import com.google.gson.Gson;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
