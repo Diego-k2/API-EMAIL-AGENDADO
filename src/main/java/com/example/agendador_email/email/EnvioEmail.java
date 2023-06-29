@@ -1,38 +1,45 @@
 package com.example.agendador_email.email;
 
-import com.mailersend.sdk.MailerSend;
-import com.mailersend.sdk.MailerSendResponse;
-import com.mailersend.sdk.emails.Email;
-import com.mailersend.sdk.exceptions.MailerSendException;
+
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
 public class EnvioEmail {
 
-    public static boolean enviarEmail(String recebedor, String assunto, String mensagem){
+    public static boolean enviarEmail(String recebedor, String assunto, String mensagem) {
 
-        Email email = new Email();
+        Properties properties = new Properties();
+        properties.setProperty("mail.transport.protocol", "smtp");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.socketFactory.port", "465");
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.port", "465");
+//        properties.put("mail.smtp.socketFactory.fallback","false");
 
-        final String EMAIL_DE = "degosantosiva@gmail.com";
+        Session session = Session.getDefaultInstance(properties,
+                new javax.mail.Authenticator(){
+                    protected PasswordAuthentication getPasswordAuthentication(){
+                        return new PasswordAuthentication("user", "pass");
+                    }
+                });
 
-        email.setFrom("Root", EMAIL_DE);
-        email.addRecipient("User", recebedor);
-        email.setSubject(assunto);
-        email.setPlain(mensagem);
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("user"));
+            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(recebedor));
+            message.setSubject(assunto);
+            message.setText(mensagem);
 
-        MailerSend mailerSend = new MailerSend();
-        mailerSend.setToken("mlsn.a3d03f20550de79b2741aa2b7540e106d63225e57d531304b6a8ffaf582289b9");
+            Transport.send(message);
 
-        try{
-            MailerSendResponse mailerSendResponse = mailerSend.emails().send(email);
-
-            if(!mailerSendResponse.messageId.isBlank()) {
-                return true;
-            }else {
-                return false;
-            }
-        } catch(MailerSendException e){
-
+        } catch(MessagingException e){
             System.out.println(e);
-            return false;
         }
+
+        return true;
     }
 }
